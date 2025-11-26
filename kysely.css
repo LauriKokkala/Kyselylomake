@@ -1,0 +1,20 @@
+label {
+    font-size: medium;
+}
+body {
+    text-align: center;
+}
+
+.muuText {
+    display: none;
+}
+
+#muubox:checked ~ #muuText1 {
+    display: block;
+}
+#muuText1:not(:placeholder-shown) ~ #muuText2{
+    display: block;
+}
+#muuText2:not(:placeholder-shown) ~ #muuText3{
+    display: block;
+}
