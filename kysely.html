@@ -13,29 +13,31 @@
         Pääkäyttäjän Puhelinnumero<br>
         <input type="number" name="puhelinNumero"><br>
         Työaikakirjaus<br>
-        <div className="Työaikakirjaus">
+        <div class="Työaikakirjaus">
             <input type="checkbox" name="työAikaKirjaus1" value="Ajo">
             <label for="Työaikakirjaus1">Ajo</label><br>
-            <input type="checkbox" name="työAikaKirjaus2" value="Ajo">
+            <input type="checkbox" name="työAikaKirjaus2" value="Lastaus">
             <label for="Työaikakirjaus2"> Lastaus</label><br>
-            <input type="checkbox" name="työAikaKirjaus3" value="Ajo">
+            <input type="checkbox" name="työAikaKirjaus3" value="Purku">
             <label for="Työaikakirjaus3"> Purku</label><br>
-            <input type="checkbox" name="työAikaKirjaus4" value="Ajo">
+            <input type="checkbox" name="työAikaKirjaus4" value="Odotus">
             <label for="Työaikakirjaus4"> Odotus</label><br>
-            <input type="checkbox" name="työAikaKirjaus5" value="Ajo">
+            <input type="checkbox" name="työAikaKirjaus5" value="Tauko">
             <label for="Työaikakirjaus5"> Tauko</label><br>
-            <input type="checkbox" id="muuBox" name="työAikaKirjaus6" value="Ajo">
+            <input type="checkbox" id="muuBox" name="työAikaKirjaus6" value="Muu">
             <label for="Työaikakirjaus6"> Muu työ</label><br>
-            <input type="text" class="muuText" id="muuText1"name="muuText1" placeholder="">
-            <input type="text" class="muuText" id="muuText2"name="muuText2" placeholder="">
-            <input type="text" class="muuText" id="muuText3"name="muuText3" placeholder="">
-            <input type="text" class="muuText" id="muuText4"name="muuText4" placeholder="">
-            <input type="text" class="muuText" id="muuText5"name="muuText5" placeholder="">
-            <input type="text" class="muuText" id="muuText6"name="muuText6" placeholder="">
-            <input type="text" class="muuText" id="muuText7"name="muuText7" placeholder="">
-            <input type="text" class="muuText" id="muuText8"name="muuText8" placeholder="">
-            <input type="text" class="muuText" id="muuText9"name="muuText9" placeholder="">
-            <input type="text" class="muuText" id="muuText10"name="muuText10" placeholder="">
+            <div class="muuTextDiv">
+            <input type="text" class="muuText" id="muuText1"name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            <input type="text" class="muuText" name="muuText[]" placeholder="">
+            </div>
         </div>
     </h3>
 </form>

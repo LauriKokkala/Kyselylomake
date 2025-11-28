@@ -1,20 +1,32 @@
 label {
     font-size: medium;
 }
+
 body {
     text-align: center;
 }
 
-.muuText {
+.muuTextDiv {
     display: none;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    place-content: center;
+    margin: 10px;
+
 }
 
-#muubox:checked ~ #muuText1 {
-    display: block;
+#muuBox:checked ~ .muuTextDiv {
+    display: grid;
 }
-#muuText1:not(:placeholder-shown) ~ #muuText2{
-    display: block;
+
+.muuText {
+    visibility: hidden;
+    margin: 10px;
 }
-#muuText2:not(:placeholder-shown) ~ #muuText3{
-    display: block;
+
+#muuText1 {
+    visibility: visible;
+}
+
+.muuText:not(:placeholder-shown) + .muuText {
+    visibility: visible;
 }
