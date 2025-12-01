@@ -2,50 +2,77 @@
 
 include("yhteys.php");
 
-// Collect basic fields
+// Kerätään kaikki helpot
 $yritysNimi  = $_POST['yritysNimi'];
 $etuNimi     = $_POST['etuNimi'];
 $sukuNimi    = $_POST['sukuNimi'];
 $puhelinNumero = $_POST['puhelinNumero'];
+$palkkaAloitus = $_POST['aloitusPaiva'];
+$palkkaLopetus = $_POST['lopetusPaiva'];
 
-// Collect selected checkboxes
-$choices = [];
-foreach ($_POST as $key => $value) {
-    if (str_starts_with($key, 'työAikaKirjaus')) {
-        $choices[] = $value;
-    }
-}
+// Kerätään valitut työaikakirjaukset
+$tyot = array_filter($_POST['työAikaKirjaus'], function($v) {
+    return trim($v) !== "";
+});
 
-$choicesJSON = json_encode($choices);  // easier to store
+$tyotJSON = json_encode($tyot);
 
-// Collect extra work texts
+// Kerätään kaikki rasittavat extratyöt
 $muuText = array_filter($_POST['muuText'], function($v) {
     return trim($v) !== "";
 });
 
 $muuJSON = json_encode(array_values($muuText));
 
-// Insert into DB
+if (isset($_POST['taukoButton'])) {
+    $tauko = $_POST['taukoButton'];
+}
+else {
+    $tauko = "";
+}
+
+if (isset($_POST['ajoButton'])) {
+    $kmKirjaus = $_POST['ajoButton'];
+}
+else {
+    $kmKirjaus = "";
+}
+
+
+
+// Databaseen heitto
 $stmt = $yhteys->prepare("
-    INSERT INTO kysely (
+    INSERT INTO asiakkaat (
         yritysNimi, etuNimi, sukuNimi, puhelinNumero,
-        työAjat, muuTyöt
+        tyoAjat, muutTyot, tauko, kilometriKirjaus, 
+        palkkaAloitus, palkkaLopetus
     ) VALUES (
         :yritys, :etu, :suku, :puhelin,
-        :työajat, :muut
+        :tyoajat, :muut, :tauko, :kmkirjaus,
+        :aloitus, :lopetus
+        
     )
 ");
 
-$stmt->execute([
-    ':yritys'  => $yritysNimi,
-    ':etu'     => $etuNimi,
-    ':suku'    => $sukuNimi,
-    ':puhelin' => $puhelinNumero,
-    ':työajat' => $choicesJSON,
-    ':muut'    => $muuJSON
-]);
+if ($stmt->execute([
+    ':yritys'   => $yritysNimi,
+    ':etu'      => $etuNimi,
+    ':suku'     => $sukuNimi,
+    ':puhelin'  => $puhelinNumero,
+    ':tyoajat'  => $tyotJSON,
+    ':muut'     => $muuJSON,
+    ':tauko'    => $tauko,
+    ':kmkirjaus'=> $kmKirjaus,
+    ':aloitus'  => $palkkaAloitus,
+    ':lopetus'  => $palkkaLopetus
+])) {
+    header("Location: kysely.html?status=ok");
+    exit;
+} 
+else {
+    echo "Database error";
+};
 
 echo "Data saved!";
-
 
 ?>

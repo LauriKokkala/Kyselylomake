@@ -14,7 +14,7 @@ body {
     text-align: start;
 }
 
-.taukoButton, .ajoButton {
+.taukoRadio, .ajoRadio {
     text-align: start;
     margin-left: 40%;
 }
@@ -29,7 +29,7 @@ body {
 
 .muuTextDiv {
     display: none;
-    grid-template-columns: 200px 200px 200px 200px 200px;
+    grid-template-columns: 200px 200px 200px;
     place-content: center;
     margin: 10px;
 
