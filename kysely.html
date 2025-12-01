@@ -13,8 +13,9 @@
         Pääkäyttäjän Puhelinnumero<br>
         <input type="number" name="puhelinNumero"><br>
         Työaikakirjaus<br>
+
         <div class="Työaikakirjaus">
-            <input type="checkbox" name="työAikaKirjaus1" value="Ajo">
+            <input type="checkbox" id="ajoBox" name="työAikaKirjaus1" value="Ajo">
             <label for="Työaikakirjaus1">Ajo</label><br>
             <input type="checkbox" name="työAikaKirjaus2" value="Lastaus">
             <label for="Työaikakirjaus2"> Lastaus</label><br>
@@ -22,23 +23,70 @@
             <label for="Työaikakirjaus3"> Purku</label><br>
             <input type="checkbox" name="työAikaKirjaus4" value="Odotus">
             <label for="Työaikakirjaus4"> Odotus</label><br>
-            <input type="checkbox" name="työAikaKirjaus5" value="Tauko">
+            <input type="checkbox" id="taukoBox" name="työAikaKirjaus5" value="Tauko">
             <label for="Työaikakirjaus5"> Tauko</label><br>
             <input type="checkbox" id="muuBox" name="työAikaKirjaus6" value="Muu">
             <label for="Työaikakirjaus6"> Muu työ</label><br>
+
             <div class="muuTextDiv">
-            <input type="text" class="muuText" id="muuText1"name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
-            <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" id="muuText1"name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
+                <input type="text" class="muuText" name="muuText[]" placeholder="">
             </div>
+
+            <div class="taukoDiv">
+                Onko tauko palkallinen?<br>
+                <div class="taukoRadioDiv">
+                    <input type="radio" class="taukoButton" name="taukoRadio" value="Kyllä">
+                    <label>Kyllä</label><br>
+                    <input type="radio" class="taukoButton" name="taukoRadio" value="Ei">
+                    <label>Ei</label><br>
+                    <input type="radio" class="taukoButton" name="taukoRadio" value="TES">
+                    <label>TES:n mukainen</label><br>
+                </div>
+            </div>
+
+            <div class="ajoDiv">
+                Kun kuljettaja aloittaa ajon, kirjataanko teillä auton kilometrit ylös? <br>
+                <div class="ajoRadioDiv">
+                    <input type="radio" class="ajoButton" name="ajoRadio" value="Kyllä">
+                    <label>Kyllä</label><br>
+                    <input type="radio" class="ajoButton" name="ajoRadio" value="Ei">
+                    <label>Ei</label><br>
+                </div>
+            </div>
+            Seuraavan palkkajakson aloitus- ja lopetuspäivä<br> 
+            <input type="date" name="aloitusPaiva"><br>
+            <input type="date" name="lopetusPaiva"><br>
+            <input type="submit">
         </div>
     </h3>
 </form>
 </body>
+
+<script>
+document.querySelectorAll('.muuText').forEach((input, index, allInputs) => {
+    input.addEventListener('input', () => {
+        // Loop through all following inputs
+        for (let i = index + 1; i < allInputs.length; i++) {
+            const prev = allInputs[i - 1];
+            const curr = allInputs[i];
+
+            // If previous is empty, current should hide → clear it
+            if (prev.value.trim() === "") {
+                curr.value = "";   // clear the textbox
+                curr.style.display = "none";
+            } else {
+                curr.style.display = "grid";
+            }
+        }
+    });
+});
+</script>

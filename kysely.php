@@ -3,10 +3,10 @@
 include("yhteys.php");
 
 // Collect basic fields
-$yritys  = $_POST['yritysNimi'];
-$etu     = $_POST['etuNimi'];
-$suku    = $_POST['sukuNimi'];
-$puhelin = $_POST['puhelinNumero'];
+$yritysNimi  = $_POST['yritysNimi'];
+$etuNimi     = $_POST['etuNimi'];
+$sukuNimi    = $_POST['sukuNimi'];
+$puhelinNumero = $_POST['puhelinNumero'];
 
 // Collect selected checkboxes
 $choices = [];
@@ -37,10 +37,10 @@ $stmt = $yhteys->prepare("
 ");
 
 $stmt->execute([
-    ':yritys'  => $yritys,
-    ':etu'     => $etu,
-    ':suku'    => $suku,
-    ':puhelin' => $puhelin,
+    ':yritys'  => $yritysNimi,
+    ':etu'     => $etuNimi,
+    ':suku'    => $sukuNimi,
+    ':puhelin' => $puhelinNumero,
     ':työajat' => $choicesJSON,
     ':muut'    => $muuJSON
 ]);

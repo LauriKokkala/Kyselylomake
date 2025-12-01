@@ -6,6 +6,27 @@ body {
     text-align: center;
 }
 
+.taukoDiv, .ajoDiv {
+    display: none;
+}
+
+.taukoRadioDiv, .ajoRadioDiv {
+    text-align: start;
+}
+
+.taukoButton, .ajoButton {
+    text-align: start;
+    margin-left: 40%;
+}
+
+#ajoBox:checked ~ .ajoDiv {
+    display: block;
+}
+
+#taukoBox:checked ~ .taukoDiv {
+    display: block;
+}
+
 .muuTextDiv {
     display: none;
     grid-template-columns: 200px 200px 200px 200px 200px;
@@ -19,14 +40,14 @@ body {
 }
 
 .muuText {
-    visibility: hidden;
+    display: none;
     margin: 10px;
 }
 
 #muuText1 {
-    visibility: visible;
+    display: grid;
 }
 
 .muuText:not(:placeholder-shown) + .muuText {
-    visibility: visible;
+    display: grid;
 }
