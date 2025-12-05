@@ -6,9 +6,16 @@ include("yhteys.php");
 $yritysNimi  = $_POST['yritysNimi'];
 $etuNimi     = $_POST['etuNimi'];
 $sukuNimi    = $_POST['sukuNimi'];
-$puhelinNumero = $_POST['puhelinNumero'];
 $palkkaAloitus = $_POST['aloitusPaiva'];
 $palkkaLopetus = $_POST['lopetusPaiva'];
+
+
+if (is_numeric($_POST['puhelinNumero'])){
+    $puhelinNumero = $_POST['puhelinNumero'];
+}
+else {
+    throw new Exception("Käytä vain numeroita");
+}
 
 // Kerätään valitut työaikakirjaukset
 $tyot = array_filter($_POST['työAikaKirjaus'], function($v) {
@@ -24,6 +31,9 @@ $muuText = array_filter($_POST['muuText'], function($v) {
 
 $muuJSON = json_encode(array_values($muuText));
 
+
+// Tarkistetaan, onko tauko tai ajo valittu
+// Jos ei, laitetaan tyhjäksi, että ei tule erroria
 if (isset($_POST['taukoButton'])) {
     $tauko = $_POST['taukoButton'];
 }
@@ -38,9 +48,7 @@ else {
     $kmKirjaus = "";
 }
 
-
-
-// Databaseen heitto
+// Databaseen laitto
 $stmt = $yhteys->prepare("
     INSERT INTO asiakkaat (
         yritysNimi, etuNimi, sukuNimi, puhelinNumero,
@@ -66,7 +74,9 @@ if ($stmt->execute([
     ':aloitus'  => $palkkaAloitus,
     ':lopetus'  => $palkkaLopetus
 ])) {
-    header("Location: kysely.html?status=ok");
+    $msg = "Yrityksen nimi: " + $yritysNimi+ "\n Pääkäyttäjän Etunimi: " + $etuNimi + "\n Pääkäyttäjän Sukunimi: " + $sukuNimi + "\n Pääkäyttäjän Puhelinnumero: " + $puhelinNumero + "\n Työaikakirjauksen valinnat: " + $tyotJSON + "\n Muut Työaikakirjauksen Tiedot: " + $muuJSON + "\n Onko tauko palkallinen: " + $tauko + "\n Kirjataanko kilometrit: " + $kmKirjaus + "\n Seuraavan Palkkakauden Alku: " + $palkkaAloitus + "\n Seuraavan Palkkakauden Loppu: " + $palkkaLopetus;
+    mail("laita tähän sähköpostisi", "Uusi Taskari Ilmoitus", $msg);
+    header("Location: kysely.html");
     exit;
 } 
 else {

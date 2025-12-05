@@ -1,35 +1,49 @@
 <link rel="stylesheet" href="kysely.css" />
 <meta charset="UTF-8">
-<body>
-<h1>Tyoaikakirjaus</h1>
-<form method="POST" action="kysely.php" id="kysely">
-    <h3>
-        Yritysnimi<br>
-        <input type="text" name="yritysNimi" required><br><br>
-        Pääkäyttäjän Etunimi<br>
-        <input type="text" name="etuNimi" required><br><br>
-        Pääkäyttäjän Sukunimi<br>
-        <input type="text" name="sukuNimi" required><br><br>
-        Pääkäyttäjän Puhelinnumero<br>
-        <input type="tel" name="puhelinNumero" required><br><br>
-        Työaikakirjaus<br>
 
-        <div class="Työaikakirjaus">
-            <input type="checkbox" id="ajoBox" name="työAikaKirjaus[]" value="Ajo">
-            <label>Ajo</label><br>
-            <input type="checkbox" name="työAikaKirjaus[]" value="Lastaus">
-            <label> Lastaus</label><br>
-            <input type="checkbox" name="työAikaKirjaus[]" value="Purku">
-            <label> Purku</label><br>
-            <input type="checkbox" name="työAikaKirjaus[]" value="Odotus">
-            <label> Odotus</label><br>
-            <input type="checkbox" id="taukoBox" name="työAikaKirjaus[]" value="Tauko">
-            <label> Tauko</label><br>
-            <input type="checkbox" id="muuBox" name="työAikaKirjaus[]" value="Muu">
-            <label> Muu työ</label><br>
+<body>
+<div class="container">
+    <h1 class="title">Työaikakirjaus</h1>
+
+    <form method="POST" action="kysely.php" id="kysely" class="form-card">
+
+        <div class="section">
+            <h2 class="section-title">Yritystiedot</h2>
+
+            <label>Yritysnimi</label>
+            <input type="text" name="yritysNimi" required>
+
+            <label>Pääkäyttäjän Etunimi</label>
+            <input type="text" name="etuNimi" required>
+
+            <label>Pääkäyttäjän Sukunimi</label>
+            <input type="text" name="sukuNimi" required>
+
+            <label>Pääkäyttäjän Puhelinnumero</label>
+            <input type="tel" name="puhelinNumero" id="puhInput" pattern="[0-9]{10}" required>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Työaikakirjaus</h2>
+
+            <div class="checkbox-image-wrapper">
+
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" class="tyoBox" id="ajoBox" name="työAikaKirjaus[]" value="Ajo"> Ajo</label>
+                    <label><input type="checkbox" class="tyoBox" name="työAikaKirjaus[]" value="Lastaus"> Lastaus</label>
+                    <label><input type="checkbox" class="tyoBox" name="työAikaKirjaus[]" value="Purku"> Purku</label>
+                    <label><input type="checkbox" class="tyoBox" name="työAikaKirjaus[]" value="Odotus"> Odotus</label>
+                    <label><input type="checkbox" class="tyoBox" id="taukoBox" name="työAikaKirjaus[]" value="Tauko"> Tauko</label>
+                    <label><input type="checkbox" class="tyoBox" id="muuBox" name="työAikaKirjaus[]" value="Muu"> Muu työ</label>
+                </div>
+
+                <div class="checkbox-image">
+                    <img src="cat.png" alt="Työaikakirjaus kuva" />
+                </div>
+            </div>
 
             <div class="muuTextDiv" id="muuTextDiv">
-                <input type="text" class="muuText" id="muuText1"name="muuText[]" placeholder="">
+                <input type="text" class="muuText" id="muuText1" name="muuText[]" placeholder="">
                 <input type="text" class="muuText" name="muuText[]" placeholder="">
                 <input type="text" class="muuText" name="muuText[]" placeholder="">
                 <input type="text" class="muuText" name="muuText[]" placeholder="">
@@ -42,39 +56,45 @@
                 <input type="text" class="muuText" name="muuText[]" placeholder="">
                 <input type="text" class="muuText" name="muuText[]" placeholder="">
             </div>
-            <div class="ajoDiv">
-                Kun kuljettaja aloittaa ajon, kirjataanko teillä auton kilometrit ylös? <br>
-                <div class="ajoRadioDiv" id="ajoRadioDiv">
-                    <input type="radio" class="ajoRadio" name="ajoButton" value="Kyllä">
-                    <label>Kyllä</label><br>
-                    <input type="radio" class="ajoRadio" name="ajoButton" value="Ei">
-                    <label>Ei</label><br>
+
+            <div class="conditional-section ajoDiv">
+                <label>Kun kuljettaja aloittaa ajon, kirjataanko kilometrit?</label>
+                <div id="ajoRadioDiv" class="radio-group">
+                    <label><input type="radio" class="ajoRadio" name="ajoButton" value="Kyllä"> Kyllä</label>
+                    <label><input type="radio" class="ajoRadio" name="ajoButton" value="Ei"> Ei</label>
                 </div>
             </div>
-            <br>
-            <div class="taukoDiv">
-                Onko tauko palkallinen?<br>
-                <div class="taukoRadioDiv" id="taukoRadioDiv">
-                    <input type="radio" class="taukoRadio" name="taukoButton" value="Kyllä">
-                    <label>Kyllä</label><br>
-                    <input type="radio" class="taukoRadio" name="taukoButton" value="Ei">
-                    <label>Ei</label><br>
-                    <input type="radio" class="taukoRadio" name="taukoButton" value="TES">
-                    <label>TES:n mukainen</label><br>
+
+            <div class="conditional-section taukoDiv">
+                <label>Onko tauko palkallinen?</label>
+                <div id="taukoRadioDiv" class="radio-group">
+                    <label><input type="radio" class="taukoRadio" name="taukoButton" value="Kyllä"> Kyllä</label>
+                    <label><input type="radio" class="taukoRadio" name="taukoButton" value="Ei"> Ei</label>
+                    <label><input type="radio" class="taukoRadio" name="taukoButton" value="TES"> TES:n mukainen</label>
                 </div>
             </div>
-            <br>
-            Seuraavan palkkajakson aloitus- ja lopetuspäivä<br> 
-            <input type="date" name="aloitusPaiva" required><br>
-            <input type="date" name="lopetusPaiva" required><br>
-            <br>
-            <input type="submit" value="Tallenna">
         </div>
-    </h3>
-</form>
+
+        <div class="section">
+            <h2 class="section-title">Palkkajakso</h2>
+            <label>Aloituspäivä</label>
+            <input type="date" name="aloitusPaiva" required>
+
+            <label>Lopetuspäivä</label>
+            <input type="date" name="lopetusPaiva" required>
+        </div>
+
+        <input type="submit" value="Tallenna" class="submit-btn">
+
+    </form>
+</div>
 </body>
 
 <script>
+
+document.getElementById("puhInput").addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+});
 
 const taukoCheckbox = document.getElementById('taukoBox');
 const taukoRadiosContainer = document.getElementById('taukoRadioDiv');
@@ -83,24 +103,48 @@ const ajoRadiosContainer = document.getElementById('ajoRadioDiv');
 const muuCheckbox = document.getElementById('muuBox');
 const muuTextContainer = document.getElementById('muuTextDiv');
 
+function toggleVisibility(checkboxId, targetSelector) {
+    const checkbox = document.getElementById(checkboxId);
+    const target = document.querySelector(targetSelector);
+
+    function update() {
+        target.style.display = checkbox.checked ? "block" : "none";
+    }
+
+    checkbox.addEventListener("change", update);
+    update(); // initialize on load
+}
+
+// Ajo
+toggleVisibility("ajoBox", ".ajoDiv");
+
+// Tauko
+toggleVisibility("taukoBox", ".taukoDiv");
+
+// Muu työ
+toggleVisibility("muuBox", "#muuTextDiv");
+
+// Poistaa valitut radio buttonit, jos siihen liityvä checkbox uncheckataan
 taukoCheckbox.addEventListener('change', function() {
     if (!this.checked) {
         taukoRadiosContainer.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
     }
 });
 
+// Poistaa valitut radio buttonit, jos siihen liityvä checkbox uncheckataan
 ajoCheckbox.addEventListener('change', function() {
     if (!this.checked) {
         ajoRadiosContainer.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
     }
 });
 
+// Poistaa muun työn textit, jos siihen liittyvä checkbox uncheckataan
 muuCheckbox.addEventListener('change', function() {
     if (!this.checked) {
         muuTextContainer.querySelectorAll('input[type="text"]').forEach(input => {
         input.value = '';
             if (input.id !== 'muuText1') {
-                input.style.display = 'none'; // hide all except the first
+                input.style.display = 'none';
             }
             else {
              document.getElementById('muuText1').style.display = 'grid';
@@ -127,7 +171,7 @@ document.querySelectorAll('.muuText').forEach((input, index, allInputs) => {
     });
 });
 
-    //tarkistaa, että jokin radio button on painettu
+    // Tarkistaa, että jokin radio button on painettu
 document.getElementById("kysely").addEventListener("submit", function(e) {
 
     const tRadios = document.querySelectorAll('input[name="taukoButton"]');
@@ -147,7 +191,8 @@ document.getElementById("kysely").addEventListener("submit", function(e) {
 
 
 });
-    //tarkistaa, että jokin radio button on painettu
+
+    // Tarkistaa, että jokin radio button on painettu
 document.getElementById("kysely").addEventListener("submit", function(e) {
 
     const aRadios = document.querySelectorAll('input[name="ajoButton"]');
@@ -167,7 +212,8 @@ document.getElementById("kysely").addEventListener("submit", function(e) {
 
 
 });
-    //tarkistaa, että jokin check box on painettu
+
+    // Tarkistaa, että jokin check box on painettu
 document.getElementById("kysely").addEventListener("submit", function(e) {
     const checkboxes = document.querySelectorAll('input[name="työAikaKirjaus[]"');
     
