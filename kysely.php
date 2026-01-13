@@ -74,7 +74,7 @@ if ($stmt->execute([
     ':aloitus'  => $palkkaAloitus,
     ':lopetus'  => $palkkaLopetus
 ])) {
-    $msg = "Yrityksen nimi: " + $yritysNimi+ "\n Pääkäyttäjän Etunimi: " + $etuNimi + "\n Pääkäyttäjän Sukunimi: " + $sukuNimi + "\n Pääkäyttäjän Puhelinnumero: " + $puhelinNumero + "\n Työaikakirjauksen valinnat: " + $tyotJSON + "\n Muut Työaikakirjauksen Tiedot: " + $muuJSON + "\n Onko tauko palkallinen: " + $tauko + "\n Kirjataanko kilometrit: " + $kmKirjaus + "\n Seuraavan Palkkakauden Alku: " + $palkkaAloitus + "\n Seuraavan Palkkakauden Loppu: " + $palkkaLopetus;
+    $msg = "Yrityksen nimi: " . $yritysNimi . "\n Pääkäyttäjän Etunimi: " . $etuNimi . "\n Pääkäyttäjän Sukunimi: " . $sukuNimi . "\n Pääkäyttäjän Puhelinnumero: " . $puhelinNumero . "\n Työaikakirjauksen valinnat: " . $tyotJSON . "\n Muut Työaikakirjauksen Tiedot: " . $muuJSON . "\n Onko tauko palkallinen: " . $tauko . "\n Kirjataanko kilometrit: " . $kmKirjaus . "\n Seuraavan Palkkakauden Alku: " . $palkkaAloitus . "\n Seuraavan Palkkakauden Loppu: " . $palkkaLopetus;
     mail("laita tähän sähköpostisi", "Uusi Taskari Ilmoitus", $msg);
     header("Location: kysely.html");
     exit;
